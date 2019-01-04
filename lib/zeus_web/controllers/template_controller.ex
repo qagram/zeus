@@ -33,6 +33,6 @@ defmodule ZeusWeb.TemplateController do
         ]
       }
     ]
-    json conn, templates
+    json conn, %{data: templates}
   end
 end
