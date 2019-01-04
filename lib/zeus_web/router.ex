@@ -10,6 +10,7 @@ defmodule ZeusWeb.Router do
       pipe_through :api
 
       resources "/templates", TemplateController, only: [:index]
+      resources "/steps", StepController, except: [:new, :edit]
     end
   end
 end
