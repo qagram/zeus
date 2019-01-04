@@ -6,6 +6,10 @@ defmodule ZeusWeb.Router do
   end
 
   scope "/api", ZeusWeb do
-    pipe_through :api
+    scope "/v1" do
+      pipe_through :api
+
+      resources "/templates", TemplateController, only: [:index]
+    end
   end
 end
