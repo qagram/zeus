@@ -42,12 +42,13 @@ defmodule ZeusWeb.TestController do
     end
   end
 
-  def run(conn, _params) do
+  def run(conn, %{"test_id" => id}) do
+    test = Domain.get_test!(id)
     Hound.start_session(browser: "phantomjs")
 
     navigate_to "http://example.org"
 
-    json conn, %{data: %{ page_title: page_title, source: page_source }}
+    json conn, %{data: %{ status: :passed }}
   end
 
   defp setup(config) do
