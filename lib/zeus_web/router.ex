@@ -11,6 +11,9 @@ defmodule ZeusWeb.Router do
 
       resources "/templates", TemplateController, only: [:index]
       resources "/steps", StepController, except: [:new, :edit]
+      resources "/tests", TestController, except: [:new, :edit]
+
+      get "/run", TestController, :run
     end
   end
 end

@@ -6,6 +6,10 @@ defmodule Zeus.Application do
   use Application
 
   def start(_type, _args) do
+
+    Application.ensure_all_started(:hound)
+    ExUnit.start()
+
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
