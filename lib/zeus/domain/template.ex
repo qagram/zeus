@@ -8,7 +8,6 @@ defmodule Zeus.Domain.Template do
       iex> list()
       [%Template{}]
   """
-
   def list do
     [
       %{
@@ -36,5 +35,18 @@ defmodule Zeus.Domain.Template do
         ]
       }
     ]
+  end
+
+  @doc """
+  Gets a list of available template keys.
+
+  ## Examples
+
+      iex> available_keys()
+      ["visit_url", "fill_form_input"]
+  """
+  def available_keys do
+    list
+    |> Enum.map(fn t-> t[:id] end)
   end
 end
