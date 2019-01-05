@@ -7,7 +7,7 @@ defmodule Zeus.Domain.Test do
 
   schema "tests" do
     field :name, :string
-    has_many :steps, Step
+    has_many :steps, Zeus.Domain.Step
 
     timestamps()
   end
