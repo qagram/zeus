@@ -22,6 +22,21 @@ defmodule Zeus.Domain do
   end
 
   @doc """
+  Returns the list of steps for a given test.
+
+  ## Examples
+
+      iex> list_steps(test)
+      [%Step{}, ...]
+
+  """
+  def list_steps(test) do
+    Step
+    |> where([s], s.test_id == ^test.id)
+    |> Repo.all
+  end
+
+  @doc """
   Gets a single step.
 
   Raises `Ecto.NoResultsError` if the Step does not exist.
@@ -36,6 +51,26 @@ defmodule Zeus.Domain do
 
   """
   def get_step!(id), do: Repo.get!(Step, id)
+
+  @doc """
+  Gets a step nested inside a test.
+
+  Raises `Ecto.NoResultsError` if the Step does not exist.
+
+  ## Examples
+
+      iex> get_step!(test, 123)
+      %Step{}
+
+      iex> get_step!(test, 456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_step!(test, id) do
+    Step
+    |> where([s], s.test_id == ^test.id)
+    |> Repo.get!(id)
+  end
 
   @doc """
   Creates a step.
