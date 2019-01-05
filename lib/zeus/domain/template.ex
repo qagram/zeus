@@ -1,5 +1,5 @@
 defmodule Zeus.Domain.Template do
-  
+
   @doc """
   Gets a list of available templates.
 
@@ -15,19 +15,19 @@ defmodule Zeus.Domain.Template do
         label: "I visit :url",
         params: [
           %{
-            name: :url, 
+            name: :url,
             type: :string
           }
         ]
-      }, 
+      },
       %{
         id: "fill_form_input",
         label: "I fill :name input with :value value",
         params: [
           %{
-            name: :name, 
+            name: :name,
             type: :string
-          }, 
+          },
           %{
             name: :value,
             type: :string
@@ -48,5 +48,10 @@ defmodule Zeus.Domain.Template do
   def available_keys do
     list
     |> Enum.map(fn t-> t[:id] end)
+  end
+
+  def find(template_id) do
+    Zeus.Domain.Template.list
+    |> Enum.find(fn t ->  t[:id] == template_id end)
   end
 end
