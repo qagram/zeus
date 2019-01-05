@@ -18,6 +18,7 @@ defmodule Zeus.Domain.Step do
     step
     |> cast(attrs, [:template_id, :params, :test_id])
     |> validate_required([:template_id, :params, :test_id])
+    |> validate_inclusion(:template_id, Zeus.Domain.Template.available_keys)
     |> assoc_constraint(:test)
   end
 end
