@@ -11,11 +11,13 @@ defmodule ZeusWeb.StepController do
     render(conn, "index.json", steps: steps)
   end
 
-  def create(conn, %{"step" => step_params}) do
+  def create(conn, %{"step" => step_params, "test_id" => test_id}) do
+    step_params = step_params |> Map.put("test_id", test_id)
+
     with {:ok, %Step{} = step} <- Domain.create_step(step_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.step_path(conn, :show, step))
+      |> put_resp_header("location", Routes.test_step_path(conn, :show, test_id, step))
       |> render("show.json", step: step)
     end
   end

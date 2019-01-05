@@ -8,6 +8,7 @@ defmodule Zeus.Domain.Step do
   schema "steps" do
     field :params, :map
     field :template_id, :string
+    belongs_to :test, Test, type: :binary_id
 
     timestamps()
   end
@@ -15,7 +16,8 @@ defmodule Zeus.Domain.Step do
   @doc false
   def changeset(step, attrs) do
     step
-    |> cast(attrs, [:template_id, :params])
-    |> validate_required([:template_id, :params])
+    |> cast(attrs, [:template_id, :params, :test_id])
+    |> validate_required([:template_id, :params, :test_id])
+    |> assoc_constraint(:test)
   end
 end
