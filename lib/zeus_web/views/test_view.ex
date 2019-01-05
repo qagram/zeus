@@ -11,7 +11,9 @@ defmodule ZeusWeb.TestView do
   end
 
   def render("test.json", %{test: test}) do
+    steps = Zeus.Repo.preload(test, :steps).steps
     %{id: test.id,
-      name: test.name}
+      name: test.name,
+      steps: render_many(steps, ZeusWeb.StepView, "step.json")}
   end
 end
